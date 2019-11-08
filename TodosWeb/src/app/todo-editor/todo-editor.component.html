@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-title>
+    Tasks
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="todoForm">
+      <input type="hidden" formControlName="id"/>
+      <input type="hidden" formControlName="creationDate"/>
+      <mat-form-field>
+        <input matInput placeholder="Titulo" formControlName="todoTitle">
+      </mat-form-field>
+      <br/>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Data de criação" formControlName="parsedDate">
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <br/>
+      <mat-checkbox formControlName="done">Finalizado</mat-checkbox>
+      <br/>
+      <br/>
+      <mat-form-field>
+        <mat-label>Prioridade</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="1">
+            Alta
+          </mat-option>
+          <mat-option value="2">
+            Média
+          </mat-option>
+          <mat-option value="3">
+            Baixa
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="center-text">
+      <button mat-raised-button color="primary" class="full-width" (click)="doRequest()" [disabled]="!todoForm.valid">
+        SALVAR
+      </button>
+  </mat-card-actions>
+</mat-card>
+
+<ngx-loading [show]="loading"></ngx-loading>
